@@ -1,0 +1,59 @@
+/* Tab Numbers Plugin Styles */
+
+.tab-number-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+
+  /* Circular badge */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  /* Typography */
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+
+  /* Colors - using CSS variables for dynamic updates */
+  color: var(--tab-number-text-color, #ffffff);
+  background-color: var(--tab-number-bg-color, #5b5b5b);
+
+  /* High contrast for accessibility */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+  /* Spacing before close button */
+  margin-right: 4px;
+
+  /* Prevent text selection */
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Active tab styling - make badge slightly more prominent */
+.workspace-tab-header.is-active .tab-number-badge {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure badge works well on both light and dark themes */
+.theme-dark .tab-number-badge {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.theme-light .tab-number-badge {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive sizing for smaller screens */
+@media (max-width: 768px) {
+  .tab-number-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+    line-height: 16px;
+    margin-right: 3px;
+  }
+}
