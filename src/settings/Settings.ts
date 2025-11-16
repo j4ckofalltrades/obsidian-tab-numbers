@@ -26,17 +26,6 @@ export class TabNumbersSettingsTab extends PluginSettingTab {
 
     containerEl.empty();
 
-    new Setting(containerEl)
-      .setName("Enable tab numbers")
-      .setDesc("Show numbered badges on tabs in the active split")
-      .addToggle((toggle) =>
-        toggle.setValue(this.plugin.settings.enabled).onChange(async (value) => {
-          this.plugin.settings.enabled = value;
-          await this.plugin.saveSettings();
-          this.plugin.refreshTabNumbers();
-        })
-      );
-
     const textColorSetting = new Setting(containerEl)
       .setName("Badge text color")
       .setDesc("Color of the number text (hex color code)");

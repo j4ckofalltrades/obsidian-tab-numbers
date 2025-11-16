@@ -9,8 +9,8 @@ will only be displayed on the currently active (split) pane.
 
 The badge text and background color can be customized via the plugin settings.
 
-- **Badge text color**: Customize the tab number color (default: white #ffffff)
-- **Badge background color**: Customize the badge background (default: gray #5b5b5b)
+- **Badge text color**: Customize the tab number color (default: black #000000)
+- **Badge background color**: Customize the badge background (default: purple #a882ff)
 
 ## Development
 
