@@ -27,8 +27,8 @@ export class TabNumbers {
     this.app = app;
     this.settings = settings;
 
-    this.keydownHandler = this.handleKeyDown.bind(this);
-    this.keyupHandler = this.handleKeyUp.bind(this);
+    this.keydownHandler = this.handleKeyDown.bind(this) as (e: KeyboardEvent) => void;
+    this.keyupHandler = this.handleKeyUp.bind(this) as (e: KeyboardEvent) => void;
   }
 
   updateSettings(settings: Settings): void {
@@ -69,13 +69,13 @@ export class TabNumbers {
 
   private showBadges(): void {
     for (const badge of this.badgeElements.values()) {
-      badge.style.display = "inline-flex";
+      badge.addClass("tab-number-badge-visible");
     }
   }
 
   private hideBadges(): void {
     for (const badge of this.badgeElements.values()) {
-      badge.style.display = "none";
+      badge.removeClass("tab-number-badge-visible");
     }
   }
 
@@ -293,21 +293,23 @@ export class TabNumbers {
     badge.style.setProperty("--tab-number-text-color", this.settings.badgeTextColor);
     badge.style.setProperty("--tab-number-bg-color", this.settings.badgeBackgroundColor);
 
-    badge.style.display = this.isCtrlPressed ? "inline-flex" : "none";
+    if (this.isCtrlPressed) {
+      badge.addClass("tab-number-badge-visible");
+    }
 
     const closeButton = tabHeader.querySelector(".workspace-tab-header-inner-close-button");
     if (closeButton?.parentElement) {
       closeButton.parentElement.insertBefore(badge, closeButton);
       this.badgeElements.set(tabHeader, badge);
     } else {
-      tabHeader.style.position = "relative";
+      tabHeader.addClass("workspace-tab-header-with-badge");
       tabHeader.appendChild(badge);
       this.badgeElements.set(tabHeader, badge);
     }
   }
 
   private clearAllBadges(): void {
-    for (const [_, badge] of this.badgeElements.entries()) {
+    for (const badge of this.badgeElements.values()) {
       badge.remove();
     }
     this.badgeElements.clear();

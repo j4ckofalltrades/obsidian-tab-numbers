@@ -1,9 +1,13 @@
-# Obsidian Tab Numbers
+![Obsidian Tab Numbers logo](https://res.cloudinary.com/j4ckofalltrades/image/upload/v1766659105/foss/obsidian-tab-numbers-logo_j7v2jl.png)
 
 Displays numbered badges (1-8) on Obsidian tabs when <kbd>Ctrl</kbd> or <kbd>Cmd</kbd> is held.
 This plugin complements the default Obsidian keyboard shortcuts for switching tabs (Ctrl/Cmd 1-8, 9 selects the last tab)
 by adding tab number 'hints'. When working with split panes, each split will have its own tab sequence and tab numbers
 will only be displayed on the currently active (split) pane.
+
+## Screenshots
+
+![Obsidian window with 3 open tabs showing tab numbers](https://res.cloudinary.com/j4ckofalltrades/image/upload/v1766659104/foss/obsidian-tab-numbers-demo_cnxsza.png)
 
 ## Customization
 
