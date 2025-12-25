@@ -1,7 +1,7 @@
 {
   "id": "tab-numbers",
   "name": "Tab Numbers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "1.10.3",
   "description": "Shows numbered badges (1-8) on tabs when holding Ctrl/Cmd for quick keyboard navigation.",
   "author": "Jordan Duabe",

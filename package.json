@@ -1,6 +1,6 @@
 {
   "name": "obsidian-tab-numbers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Displays numbered badges on Obsidian tabs when Ctrl/Cmd is held.",
   "main": "main.js",
   "scripts": {
