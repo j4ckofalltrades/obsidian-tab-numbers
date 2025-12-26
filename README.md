@@ -16,6 +16,28 @@ The badge text and background color can be customized via the plugin settings.
 - **Badge text color**: Customize the tab number color (default: black #000000)
 - **Badge background color**: Customize the badge background (default: purple #a882ff)
 
+## Installation
+
+Manual installation is currently the only supported method.
+
+1. **Download the plugin files from the latest release on GitHub**
+   - Download the `main.js`, `manifest.json`, and `styles.css` files.
+
+2. **Copy files to your vault's plugin directory**:
+   - Copy `main.js`, `manifest.json`, and `styles.css` to:
+     ```
+     /path/to/your/vault/.obsidian/plugins/tab-numbers/
+     ```
+
+3. **Reload Obsidian**:
+   - Open Developer Console: **Ctrl/Cmd + Shift + I**
+   - Run: `app.commands.executeCommandById('app:reload')`
+   - Or restart Obsidian
+
+4. **Enable the plugin**:
+   - Go to **Settings → Community plugins**
+   - Find "Tab Numbers" and enable the plugin
+
 ## Development
 
 ### Setup
