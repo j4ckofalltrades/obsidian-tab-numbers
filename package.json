@@ -36,5 +36,10 @@
     "*.{ts,tsx,js,jsx,json}": [
       "biome check --write --no-errors-on-unmatched"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "picomatch": "^4.0.2"
+    }
   }
 }
