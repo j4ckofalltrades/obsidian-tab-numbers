@@ -1,6 +1,6 @@
 {
   "name": "obsidian-tab-numbers",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Displays numbered badges on Obsidian tabs when Ctrl/Cmd is held.",
   "main": "main.js",
   "scripts": {
@@ -24,18 +24,15 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
     "@types/node": "^22.16.0",
-    "builtin-modules": "^5.0.0",
     "esbuild": "^0.27.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "nano-staged": "^0.8.0",
     "obsidian": "latest",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3"
   },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,json}": [
-      "biome check --write --no-errors-on-unmatched"
-    ]
+  "nano-staged": {
+    "*.{ts,tsx,js,jsx,json}": "biome check --write --no-errors-on-unmatched"
   },
   "pnpm": {
     "overrides": {

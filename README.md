@@ -1,3 +1,5 @@
+# Tab Numbers
+
 ![Obsidian Tab Numbers logo](https://res.cloudinary.com/j4ckofalltrades/image/upload/v1766659105/foss/obsidian-tab-numbers-logo_j7v2jl.png)
 
 Displays numbered badges (1-8) on Obsidian tabs when <kbd>Ctrl</kbd> or <kbd>Cmd</kbd> is held.
