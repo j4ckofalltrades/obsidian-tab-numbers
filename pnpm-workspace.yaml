@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: false
+confirmModulePurge: false
+overrides:
+  picomatch: "^4.0.2"
