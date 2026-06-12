@@ -24,7 +24,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
     "@types/node": "^22.19.19",
-    "esbuild": "^0.27.7",
+    "esbuild": "^0.28.1",
     "husky": "^9.1.7",
     "nano-staged": "^0.8.0",
     "obsidian": "latest",
