@@ -28,9 +28,9 @@ export class TabNumbers {
     this.app = app;
     this.settings = settings;
 
-    this.keydownHandler = this.handleKeyDown.bind(this) as (e: KeyboardEvent) => void;
-    this.keyupHandler = this.handleKeyUp.bind(this) as (e: KeyboardEvent) => void;
-    this.blurHandler = this.handleBlur.bind(this) as () => void;
+    this.keydownHandler = this.handleKeyDown.bind(this);
+    this.keyupHandler = this.handleKeyUp.bind(this);
+    this.blurHandler = this.handleBlur.bind(this);
   }
 
   // Obsidian binds tab-switching to Cmd on macOS (and devices pretending to be
@@ -302,10 +302,11 @@ export class TabNumbers {
       return;
     }
 
-    const badge = document.createElement("div");
-    badge.className = "tab-number-badge";
-    badge.setAttribute("data-tab-number", number.toString());
-    badge.textContent = number.toString();
+    const badge = createEl("div", {
+      cls: "tab-number-badge",
+      attr: { "data-tab-number": number.toString() },
+      text: number.toString(),
+    });
 
     badge.style.setProperty("--tab-number-text-color", this.settings.badgeTextColor);
     badge.style.setProperty("--tab-number-bg-color", this.settings.badgeBackgroundColor);
