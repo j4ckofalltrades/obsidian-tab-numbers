@@ -1,4 +1,4 @@
-import { type App, PluginSettingTab, Setting, type SettingDefinitionItem } from "obsidian";
+import { type App, PluginSettingTab, type SettingDefinitionItem } from "obsidian";
 import type TabNumbersPlugin from "../main";
 
 export interface Settings {
@@ -39,82 +39,5 @@ export class TabNumbersSettingsTab extends PluginSettingTab {
   async setControlValue(key: string, value: unknown): Promise<void> {
     await super.setControlValue(key, value);
     this.plugin.refreshTabNumbers();
-  }
-
-  // Fallback for Obsidian < 1.13.0, which doesn't support getSettingDefinitions().
-  display(): void {
-    const { containerEl } = this;
-
-    containerEl.empty();
-
-    const textColorSetting = new Setting(containerEl)
-      .setName("Badge text color")
-      .setDesc("Color of the number text (hex color code)");
-
-    textColorSetting
-      .addText((text) =>
-        text
-          .setPlaceholder("#ffffff")
-          .setValue(this.plugin.settings.badgeTextColor)
-          .onChange(async (value) => {
-            if (/^#[0-9A-Fa-f]{6}$/.test(value) || value === "") {
-              this.plugin.settings.badgeTextColor = value || "#ffffff";
-              await this.plugin.saveSettings();
-              this.plugin.refreshTabNumbers();
-              const colorPicker = textColorSetting.settingEl.querySelector('input[type="color"]') as HTMLInputElement;
-              if (colorPicker) {
-                colorPicker.value = this.plugin.settings.badgeTextColor;
-              }
-            }
-          })
-      )
-      .addColorPicker((color) => {
-        color.setValue(this.plugin.settings.badgeTextColor).onChange(async (value) => {
-          this.plugin.settings.badgeTextColor = value;
-          await this.plugin.saveSettings();
-          this.plugin.refreshTabNumbers();
-          const textInput = textColorSetting.settingEl.querySelector(
-            'input[type="text"][placeholder="#ffffff"]'
-          ) as HTMLInputElement;
-          if (textInput) {
-            textInput.value = value;
-          }
-        });
-      });
-
-    const bgColorSetting = new Setting(containerEl)
-      .setName("Badge background color")
-      .setDesc("Background color of the badge (hex color code)");
-
-    bgColorSetting
-      .addText((text) =>
-        text
-          .setPlaceholder("#5b5b5b")
-          .setValue(this.plugin.settings.badgeBackgroundColor)
-          .onChange(async (value) => {
-            if (/^#[0-9A-Fa-f]{6}$/.test(value) || value === "") {
-              this.plugin.settings.badgeBackgroundColor = value || "#5b5b5b";
-              await this.plugin.saveSettings();
-              this.plugin.refreshTabNumbers();
-              const colorPicker = bgColorSetting.settingEl.querySelector('input[type="color"]') as HTMLInputElement;
-              if (colorPicker) {
-                colorPicker.value = this.plugin.settings.badgeBackgroundColor;
-              }
-            }
-          })
-      )
-      .addColorPicker((color) => {
-        color.setValue(this.plugin.settings.badgeBackgroundColor).onChange(async (value) => {
-          this.plugin.settings.badgeBackgroundColor = value;
-          await this.plugin.saveSettings();
-          this.plugin.refreshTabNumbers();
-          const textInput = bgColorSetting.settingEl.querySelector(
-            'input[type="text"][placeholder="#5b5b5b"]'
-          ) as HTMLInputElement;
-          if (textInput) {
-            textInput.value = value;
-          }
-        });
-      });
   }
 }

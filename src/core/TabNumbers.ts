@@ -302,7 +302,7 @@ export class TabNumbers {
       return;
     }
 
-    const badge = createEl("div", {
+    const badge = createDiv({
       cls: "tab-number-badge",
       attr: { "data-tab-number": number.toString() },
       text: number.toString(),
