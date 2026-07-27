@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Detect the OS-appropriate modifier key (Cmd on macOS, Ctrl on Windows/Linux) for showing tab number hints, using Obsidian's built-in `Platform.isMacOS`
+- Hide badges on window blur so they don't stay visible when Obsidian loses focus while the modifier is held
+
 ## 0.1.3
 
 - Replace `builtin-modules` with Node.js built-in `node:module`
