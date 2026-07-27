@@ -1,5 +1,5 @@
 import type { App, WorkspaceLeaf } from "obsidian";
-import { View } from "obsidian";
+import { Platform, View } from "obsidian";
 import type { Settings } from "../settings/Settings";
 
 interface WorkspaceLeafExt {
@@ -19,9 +19,10 @@ export class TabNumbers {
   private settings: Settings;
   private badgeElements: Map<HTMLElement, HTMLElement> = new Map();
   private refreshTimeout: number | null = null;
-  private isCtrlPressed = false;
+  private isModifierActive = false;
   private readonly keydownHandler: (e: KeyboardEvent) => void;
   private readonly keyupHandler: (e: KeyboardEvent) => void;
+  private readonly blurHandler: () => void;
 
   constructor(app: App, settings: Settings) {
     this.app = app;
@@ -29,6 +30,13 @@ export class TabNumbers {
 
     this.keydownHandler = this.handleKeyDown.bind(this) as (e: KeyboardEvent) => void;
     this.keyupHandler = this.handleKeyUp.bind(this) as (e: KeyboardEvent) => void;
+    this.blurHandler = this.handleBlur.bind(this) as () => void;
+  }
+
+  // Obsidian binds tab-switching to Cmd on macOS (and devices pretending to be
+  // one, like iPadOS) and Ctrl everywhere else, so only that key should trigger hints.
+  private isModifierKey(e: KeyboardEvent): boolean {
+    return Platform.isMacOS ? e.metaKey : e.ctrlKey;
   }
 
   updateSettings(settings: Settings): void {
@@ -39,12 +47,14 @@ export class TabNumbers {
   start(): void {
     document.addEventListener("keydown", this.keydownHandler, true);
     document.addEventListener("keyup", this.keyupHandler, true);
+    window.addEventListener("blur", this.blurHandler);
     this.refresh();
   }
 
   stop(): void {
     document.removeEventListener("keydown", this.keydownHandler, true);
     document.removeEventListener("keyup", this.keyupHandler, true);
+    window.removeEventListener("blur", this.blurHandler);
 
     if (this.refreshTimeout !== null) {
       window.clearTimeout(this.refreshTimeout);
@@ -54,15 +64,22 @@ export class TabNumbers {
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
-    if ((e.ctrlKey || e.metaKey) && !this.isCtrlPressed) {
-      this.isCtrlPressed = true;
+    if (this.isModifierKey(e) && !this.isModifierActive) {
+      this.isModifierActive = true;
       this.showBadges();
     }
   }
 
   private handleKeyUp(e: KeyboardEvent): void {
-    if (!e.ctrlKey && !e.metaKey && this.isCtrlPressed) {
-      this.isCtrlPressed = false;
+    if (!this.isModifierKey(e) && this.isModifierActive) {
+      this.isModifierActive = false;
+      this.hideBadges();
+    }
+  }
+
+  private handleBlur(): void {
+    if (this.isModifierActive) {
+      this.isModifierActive = false;
       this.hideBadges();
     }
   }
@@ -293,7 +310,7 @@ export class TabNumbers {
     badge.style.setProperty("--tab-number-text-color", this.settings.badgeTextColor);
     badge.style.setProperty("--tab-number-bg-color", this.settings.badgeBackgroundColor);
 
-    if (this.isCtrlPressed) {
+    if (this.isModifierActive) {
       badge.addClass("tab-number-badge-visible");
     }
 
